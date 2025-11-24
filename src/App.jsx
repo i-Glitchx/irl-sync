@@ -7,6 +7,8 @@ import {
   FiUsers,
   FiCoffee,
   FiCompass,
+  FiMapPin,
+  FiUserPlus
 } from 'react-icons/fi';
 
 function Screen({ id, active, children }) {
@@ -578,8 +580,83 @@ export default function App() {
                 <p>Open table nights · Easy way to meet new people offline.</p>
               </div>
 
+              <button className="btn btn-secondary"
+                style={{ marginRight: 6 }} 
+                onClick={() => goto('nearby')}
+              >
+                <FiMapPin style={{ marginRight: 6 }} />
+                See people nearby
+              </button>
+
               <BottomNav current={screen} goto={goto} />
             </Screen>
+
+            {/* PEOPLE NEARBY */}
+            <Screen id="screen-nearby" active={screen === 'nearby'}>
+              <div className="back-row">
+                <button className="back-btn" onClick={() => goto('map')}>
+                  ←
+                </button>
+                <div className="back-title">People nearby</div>
+              </div>
+
+              <div className="nearby-pill">
+                <span className="nearby-dot" />
+                Location sharing ON (demo)
+              </div>
+
+                <div className="subtitle" style={{ marginTop: 8 }}>
+                  These are people within about a 1 mile radius who have opted in to being
+                  discoverable for in-person meetups.
+                </div>
+
+                <div className="card nearby-card">
+                  <div className="nearby-row">
+                    <div className="avatar avatar-1">A</div>
+                    <div className="nearby-main">
+                      <div className="nearby-name">Alex (21)</div>
+                      <div className="nearby-meta">Wants: coffee & study session</div>
+                      <div className="nearby-distance">0.3 miles · at Café Luna</div>
+                    </div>
+                    <button className="nearby-action">
+                      <FiUserPlus />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="card nearby-card">
+                  <div className="nearby-row">
+                    <div className="avatar avatar-2">M</div>
+                    <div className="nearby-main">
+                      <div className="nearby-name">Maya (19)</div>
+                      <div className="nearby-meta">Looking for: walk & talk break</div>
+                      <div className="nearby-distance">0.6 miles · heading to City Park</div>
+                    </div>
+                    <button className="nearby-action">
+                      <FiUserPlus />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="card nearby-card">
+                  <div className="nearby-row">
+                    <div className="avatar avatar-3">J</div>
+                    <div className="nearby-main">
+                      <div className="nearby-name">Jordan (20)</div>
+                      <div className="nearby-meta">Board games · open to new people</div>
+                      <div className="nearby-distance">1.1 miles · at Board Game Hub</div>
+                    </div>
+                    <button className="nearby-action">
+                      <FiUserPlus />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="footer-hint">
+                  In a real version, this screen would use location permissions and only show
+                  people who opt in to being discovered for in-person meetups.
+                </div>         
+              </Screen>
 
             {/* CHAT LIST */}
             <Screen id="screen-chats" active={screen === 'chats'}>
