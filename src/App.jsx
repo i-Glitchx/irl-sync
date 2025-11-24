@@ -257,6 +257,15 @@ export default function App() {
                 View IRL rewards
               </button>
 
+              <button
+                className="btn btn-ghost"
+                style={{ marginTop: 6 }}
+                onClick={() => goto('stats')}
+              >
+                View your progress
+              </button>
+
+
               <div className="link" onClick={() => goto('hangout')}>
                 Preview “Hangout in progress” screen →
               </div>
@@ -474,6 +483,60 @@ export default function App() {
                   <span className="muted">Cost: 30 IRL points</span>
                   <span className="badge">Limited</span>
                 </div>
+              </div>
+            </Screen>
+
+            {/* STATS / PROGRESS */}
+            <Screen id="screen-stats" active={screen === 'stats'}>
+              <div className="back-row">
+                <button className="back-btn" onClick={() => goto('dashboard')}>
+                  ←
+                </button>
+                <div className="back-title">Your progress</div>
+              </div>
+
+              <div className="card">
+                <div className="section-label">This week</div>
+                <h3> Total IRL minutes</h3>
+                <p>
+                  You've spent <strong>214 minutes</strong> in face-to-face hangouts tracked
+                  by IRL Sync.
+                </p>
+                <div className="stat-row">
+                  <div className="stat-number">+71%</div>
+                  <div className="stat-label">of 300 min weekly goal</div>
+                </div>
+              </div>
+
+              <div className="card">
+                <div className="section-label">Sessions</div>
+                <h3>Phone-free hangouts</h3>
+                <p>
+                  <strong>5 Sessions</strong>this week where your group kept phones away.
+                </p>
+                <div className="stat-row">
+                  <div className="stat-number">3</div>
+                  <div className="stat-label">days in a row streak</div>
+                </div>
+              </div>
+
+              <div className="card">
+                <div className="section-label">Impact</div>
+                <h3>Scrolling replaced</h3>
+                <p>
+                  Based on your average phone use, that's roughly
+                  <strong>2 hours</strong> of doomscrolling swapped for real-world 
+                  conversations.
+                </p>
+                <div className="stat-row">
+                  <div className="stat-number">+15%</div>
+                  <div className="stat-label">over last week</div>
+                </div>
+              </div>
+
+              <div className="footer-hint">
+                The prototype uses sample data, but a real app would pull this from tracked
+                hangouts and focus mode time.
               </div>
             </Screen>
 

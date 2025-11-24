@@ -590,6 +590,25 @@ select.input {
   cursor: pointer;
 }
 
+.stat-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+
 /* Responsive */
 @media (max-width: 480px) {
   .device-wrapper {
