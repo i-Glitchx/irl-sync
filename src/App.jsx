@@ -497,50 +497,77 @@ export default function App() {
                 <div className="back-title">Your progress</div>
               </div>
 
-              <div className="card">
-                <div className="section-label">This week</div>
-                <h3> Total IRL minutes</h3>
-                <p>
-                  You've spent <strong>214 minutes</strong> in face-to-face hangouts tracked
-                  by IRL Sync.
-                </p>
-                <div className="stat-row">
-                  <div className="stat-number">+71%</div>
-                  <div className="stat-label">of 300 min weekly goal</div>
-                </div>
+            {/* Level + XP */}
+            <div className="card">
+              <div className="section-label">Level</div>
+              <h3>Level 4 · Social Explorer</h3>
+              <p>
+                You’re leveling up by replacing doomscrolling with real-world experience. 
+                Keep showing up to reach the next rank.
+              </p>
+
+              <div className="xp-label-row">
+                <span className="xp-current">1450 XP</span>
+                <span className="xp-total">2000 XP to Level 5</span>
               </div>
 
-              <div className="card">
-                <div className="section-label">Sessions</div>
-                <h3>Phone-free hangouts</h3>
-                <p>
-                  <strong>5 Sessions</strong>this week where your group kept phones away.
-                </p>
-                <div className="stat-row">
-                  <div className="stat-number">3</div>
-                  <div className="stat-label">days in a row streak</div>
-                </div>
+              <div className="xp-bar">
+                <div className="xp-bar-fill" style={{ width: '72%' }} />
               </div>
 
-              <div className="card">
-                <div className="section-label">Impact</div>
-                <h3>Scrolling replaced</h3>
-                <p>
-                  Based on your average phone use, that's roughly
-                  <strong>2 hours</strong> of doomscrolling swapped for real-world 
-                  conversations.
-                </p>
-                <div className="stat-row">
-                  <div className="stat-number">+15%</div>
-                  <div className="stat-label">over last week</div>
-                </div>
+              <div className="muted" style={{ marginTop: 6, fontSize: 12 }}>
+                Prototype uses sample data — a real app would pull this from tracked
+                hangouts and focus mode sessions.
+              </div>
+            </div>
+
+            {/* Weekly stats */}
+            <div className="card">
+              <div className="section-label">This week</div>
+              <h3>Face-to-face time</h3>
+              <p>
+                <strong>214 minutes</strong> in real-life hangouts logged so far this
+                week.
+              </p>
+
+              <div className="stats-row">
+                <div className="stat-number">71%</div>
+                <div className="stat-label">of 300 min weekly goal</div>
               </div>
 
-              <div className="footer-hint">
-                The prototype uses sample data, but a real app would pull this from tracked
-                hangouts and focus mode time.
+              <div className="stat-grid">
+                <div className="stat-pill">
+                  <div className="stat-pill-number">5</div>
+                  <div className="stat-pill-label">Phone-free sessions</div>
+                </div>
+                <div className="stat-pill">
+                  <div className="stat-pill-number">3</div>
+                  <div className="stat-pill-label">Day streak</div>
+                </div>
+                <div className="stat-pill">
+                  <div className="stat-pill-number">3.5h</div>
+                  <div className="stat-pill-label">Scrolling replaced</div>
+                </div>
               </div>
-            </Screen>
+            </div>
+
+            {/* Badges / achievements */}
+            <div className="card">
+              <div className="section-label">Achievements</div>
+              <h3>Little wins add up!</h3>
+              <p>
+                Each badge marks a step away from phone addiction and toward real life.
+              </p>
+
+              <div className="badge-row">
+                <div className="badge-pill badge-gold">First 60-min hangout</div>
+                <div className="badge-pill badge-blue">3 days in a row</div>
+                <div className="badge-pill badge-green">Phone-free café session</div>
+                <div className="badge-pill badge-purple">Tried a new third place</div>
+              </div>
+            </div>
+            
+          </Screen>
 
             {/* MAP / THIRD PLACES */}
             <Screen id="screen-map" active={screen === 'map'}>
