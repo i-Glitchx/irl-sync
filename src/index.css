@@ -608,26 +608,110 @@ select.input {
   color: var(--text-muted);
 }
 
+/* Profile */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-/* Responsive */
-@media (max-width: 480px) {
-  .device-wrapper {
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  .device {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  .device-inner {
-    border-radius: 0;
-  }
-  .side-button {
-    display: none;
-  }
+.profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #3b82f6, #22c55e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f9fafb;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.profile-handle {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.profile-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Posting power */
+.posting-row {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.posting-info {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.posting-number {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.posting-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.posting-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.posting-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, #f97316);
+}
+
+/* Feed */
+.feed-item {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+
+.feed-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.feed-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.feed-locked {
+  background: #fef2f2;
+  border-color: #fecaca;
 }
 
 .nearby-pill {
@@ -814,3 +898,48 @@ select.input {
   background: #ede9fe;
   color: #5b21b6;
 }
+
+.milestone-box {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.milestone-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #1d4ed8;
+  margin-bottom: 4px;
+}
+
+.milestone-text {
+  font-size: 12px;
+  color: var(--text-main);
+}
+
+
+
+/* Responsive */
+@media (max-width: 480px) {
+  .device-wrapper {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .device {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .device-inner {
+    border-radius: 0;
+  }
+  .side-button {
+    display: none;
+  }
+}
+

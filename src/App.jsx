@@ -8,7 +8,9 @@ import {
   FiCoffee,
   FiCompass,
   FiMapPin,
-  FiUserPlus
+  FiUserPlus,
+  FiUser,
+  FiLock,
 } from 'react-icons/fi';
 
 function Screen({ id, active, children }) {
@@ -42,6 +44,14 @@ function BottomNav({ current, goto }) {
       >
         <FiMessageCircle />
         <span>Chats</span>
+      </button>
+
+       <button
+        className={`nav-item${current === 'profile' ? ' active' : ''}`}
+        onClick={() => goto('profile')}
+      >
+        <FiUser />
+        <span>Profile</span>
       </button>
     </div>
   );
@@ -162,7 +172,7 @@ export default function App() {
                 <h3>Chats that depend on real life</h3>
                 <p>
                   Group chats stay active only if your group actually meets up
-                  every few days. No more ghost groups.
+                  a few times a month. No more ghost groups.
                 </p>
               </div>
 
@@ -266,6 +276,8 @@ export default function App() {
               >
                 View your progress
               </button>
+
+              <BottomNav current={screen} goto={goto} />
 
 
               <div className="link" onClick={() => goto('hangout')}>
@@ -515,6 +527,15 @@ export default function App() {
                 <div className="xp-bar-fill" style={{ width: '72%' }} />
               </div>
 
+              {/* Next milestone */}
+              <div className="milestone-box">
+                <div className="milestone-title">Next milestone</div>
+                <div className="milestone-text">
+                    Do one 30-minute phone-free hangout with a new person to earn{' '}
+                    <strong>+150 XP</strong> and unlock <strong>Level 5</strong>.
+                </div>      
+              </div>
+
               <div className="muted" style={{ marginTop: 6, fontSize: 12 }}>
                 Prototype uses sample data — a real app would pull this from tracked
                 hangouts and focus mode sessions.
@@ -554,7 +575,7 @@ export default function App() {
             {/* Badges / achievements */}
             <div className="card">
               <div className="section-label">Achievements</div>
-              <h3>Little wins add up!</h3>
+              <h3>Little wins that add up!</h3>
               <p>
                 Each badge marks a step away from phone addiction and toward real life.
               </p>
@@ -773,6 +794,186 @@ export default function App() {
                 </button>
               </div>
             </Screen>
+
+            {/* PROFILE */}
+            <Screen id="screen-profile" active={screen === 'profile'}>
+              <div className="back-row">
+                <button className="back-btn" onClick={() => goto('dashboard')}>
+                  ←
+                </button>
+                <div className="back-title">Your profile</div>
+              </div>
+
+              {/* Header */}
+              <div className="card profile-header">
+                <div className="profile-avatar">K</div>
+                <div className="profile-main">
+                  <div className="profile-name">
+                    <FiUser style={{ marginRight: 6 }} />
+                    Ken Crabtree
+                  </div>
+                  <div className="profile-handle">@ken_crabtree</div>
+                  <div className="profile-meta">Student · Bay Area · Third-place explorer</div>
+                </div>
+              </div>
+
+              {/* IRL summary */}
+              <div className="card">
+                <div className="section-label">IRL summary</div>
+                <h3>Level 4 · Social Explorer</h3>
+                <p>
+                  <strong>1450 IRL XP</strong> · <strong>214 min</strong> this week ·{' '}
+                  <strong>5</strong> phone-free sessions · <strong>3-day</strong> streak.
+                </p>
+
+                <div className="xp-bar" style={{ marginTop: 10 }}>
+                  <div className="xp-bar-fill" style={{ width: '72%' }} />
+                </div>
+
+                <div className="muted" style={{ marginTop: 6, fontSize: 12 }}>
+                  Your profile grows only when you do things offline — hangouts, focus mode,
+                  and trying new third places.
+                </div>
+              </div>
+
+              {/* Friends summary */}
+              <div className="card">
+                <div className="section-label">Friends</div>
+                <h3>23 friends · 12 active in IRL Sync this month</h3>
+                <p>
+                  Your friends list is built from people you’ve actually met in person and
+                  scanned with your QR code. No ghost friends, only real connections.
+                </p>
+
+                <button
+                  className="btn btn-secondary"
+                  style={{ marginTop: 10 }}
+                  onClick={() => goto('friends')}
+                >
+                  View all friends
+                </button>
+              </div>
+
+              {/* Posting power */}
+              <div className="card">
+                <div className="section-label">Posting power</div>
+                <h3>IRL-limited social feed</h3>
+                <p>
+                  To keep this from becoming another doomscroll app, posting and certain
+                  features are limited by your IRL points.
+                </p>
+
+                <div className="posting-row">
+                  <div className="posting-info">
+                    <div className="posting-number">2</div>
+                    <div className="posting-label">posts left today</div>
+                  </div>
+                  <div className="posting-bar">
+                    <div className="posting-bar-fill" style={{ width: '40%' }} />
+                  </div>
+                </div>
+
+                <div className="muted" style={{ marginTop: 6, fontSize: 12 }}>
+                  Earn more post credits by joining real hangouts instead of scrolling.
+                </div>          
+              </div>
+
+              {/* Sample posts / locked content */}
+              <div className="card">
+                <div className="section-label">Your moments</div>
+                <h3>Recent IRL posts</h3>
+                <p style={{ marginBottom: 10 }}>
+                  Prototype view: simple text posts tied to real places, not viral content.
+                </p>
+
+                <div className="feed-item">
+                  <div className="feed-title">Coffee with Alex at Café Luna ☕</div>
+                  <div className="feed-meta">Yesterday · 45 min phone-free</div>
+                </div>
+
+                <div className="feed-item">
+                  <div className="feed-title">Sunset walk at City Park 🌅</div>
+                  <div className="feed-meta">2 days ago · 35 min phone-free</div>
+                </div>
+
+                <div className="feed-item feed-locked">
+                  <div className="feed-title">
+                    <FiLock style={{ marginRight: 6 }} />
+                    More posts locked
+                  </div>
+                  <div className="feed-meta">
+                    Do one more hangout this week to unlock extra posts.
+                  </div>
+                </div>
+                </div>
+              </Screen>
+
+              {/* FRIENDS LIST */}
+              <Screen id="screen-friends" active={screen === 'friends'}>
+                <div className="back-row">
+                  <button className="back-btn" onClick={() => goto('profile')}>
+                    ←
+                  </button>
+                  <div className="back-title">Your friends</div>
+                </div>
+
+                <div className="friends-pill">
+                  <span className="friends-dot" />
+                  23 friends · IRL-verified only
+                </div>
+
+                <div className="subtitle" style={{ marginTop: 8 }}>
+                  Everyone here has been added by scanning each other’s QR codes in person.
+                  No random follows, no bots — just people you actually know.
+                </div>
+
+                <div className="card friend-card">
+                  <div className="friend-row">
+                  <div className="friend-avatar friend-a">A</div>
+                    <div className="friend-main">
+                      <div className="friend-name">Alex</div>
+                      <div className="friend-meta">Last hangout: 2 days ago · Café Luna</div>
+                      <div className="friend-tag">Study buddy · Coffee runs</div>
+                    </div>
+                    <button className="friend-action">
+                      Invite to hangout
+                    </button>
+                  </div>
+                </div>
+
+                <div className="card friend-card">
+                  <div className="friend-row">
+                    <div className="friend-avatar friend-m">M</div>
+                    <div className="friend-main">
+                      <div className="friend-name">Maya</div>
+                      <div className="friend-meta">Last hangout: 5 days ago · City Park</div>
+                      <div className="friend-tag">Walk & talk · Mental health check-ins</div>
+                    </div>
+                    <button className="friend-action">
+                      Invite to hangout
+                    </button>
+                  </div>
+                </div>
+
+                <div className="card friend-card">
+                  <div className="friend-row">
+                    <div className="friend-avatar friend-j">J</div>
+                    <div className="friend-main">
+                      <div className="friend-name">Jordan</div>
+                      <div className="friend-meta">Last hangout: 1 week ago · Board Game Hub</div>
+                      <div className="friend-tag">Game nights · New people</div>
+                    </div>
+                    <button className="friend-action">
+                      Invite to hangout
+                    </button>
+                  </div>
+                </div>
+
+                <div className="footer-hint">
+                  In a real version, this screen would show filters, mutual third places, and
+                  quick actions to start IRL-focused group chats.
+                </div>
+              </Screen>
           </div>
         </div>
       </div>
