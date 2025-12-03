@@ -11,7 +11,27 @@ import {
   FiUserPlus,
   FiUser,
   FiLock,
+  FiClock,
+  FiList,
+  FiArrowRight
 } from 'react-icons/fi';
+import FLIPLogo from "./assets/flip-logo-nobg.png"; // keep your correct path
+
+function LogoHeader() {
+  return (
+    <div className="brand-header">
+      <img
+        src={FLIPLogo}
+        alt="FLIP logo"
+        className="brand-logo"
+        style={{ width: 32, height: "auto" }}  // 👈 hard limit the size
+      />
+    </div>
+  );
+}
+
+
+
 
 function Screen({ id, active, children }) {
   return (
@@ -117,7 +137,7 @@ export default function App() {
         <div className="device-inner">
           <div className="notch" />
 
-          <div className="status-bar">IRL Sync · React Prototype</div>
+          <div className="status-bar">FLIP · React Prototype</div>
 
           <div
             className="app"
@@ -126,11 +146,16 @@ export default function App() {
           >
             {/* WELCOME */}
             <Screen id="screen-welcome" active={screen === 'welcome'}>
+              {/* App Logo for Welcome screen */}
+              <div className="welcome-logo-wrap">
+                <img src={FLIPLogo} alt="FLIP Logo" className="welcome-logo" />
+              </div>
+
               <div style={{ marginTop: 40 }} />
               <div className="pill">Prototype · Tap or swipe</div>
               <div className="title">Turn screen time into real-life time.</div>
               <div className="subtitle">
-                IRL Sync helps you swap endless scrolling for real-world
+                FLIP helps you swap endless scrolling for real-world
                 hangouts, deeper friendships, and time in your local third
                 places.
               </div>
@@ -202,11 +227,14 @@ export default function App() {
 
             {/* DASHBOARD */}
             <Screen id="screen-dashboard" active={screen === 'dashboard'}>
+              {/* App Logo */}
+              <LogoHeader />
+
               <div className="back-row">
                 <button className="back-btn" onClick={() => goto('welcome')}>
                   ←
                 </button>
-                <div className="back-title">Today in IRL Sync</div>
+                <div className="back-title">Today in FLIP</div>
               </div>
 
               <div
@@ -266,7 +294,7 @@ export default function App() {
                 style={{ marginTop: 6 }}
                 onClick={() => goto('rewards')}
               >
-                View IRL rewards
+                View FLIP rewards
               </button>
 
               <button
@@ -276,6 +304,15 @@ export default function App() {
               >
                 View your progress
               </button>
+
+              <button
+                className="btn btn-ghost"
+                style={{ marginTop: 6 }}
+                onClick={() => goto("plan-builder")}
+              >
+                Open plan builder
+              </button>
+
 
               <BottomNav current={screen} goto={goto} />
 
@@ -356,7 +393,7 @@ export default function App() {
               <div className="card">
                 <div className="section-label">Suggested</div>
                 <h3>Alex, Maya, Jordan</h3>
-                <p>Friends you’ve met with recently in IRL Sync.</p>
+                <p>Friends you’ve met with recently in FLIP.</p>
               </div>
 
               <button className="btn btn-secondary">Add from contacts</button>
@@ -490,7 +527,7 @@ export default function App() {
               <div className="card">
                 <h3>Local Bookstore · 10% off</h3>
                 <p>
-                  Join a book club meetup hosted through IRL Sync once this
+                  Join a book club meetup hosted through FLIP once this
                   month.
                 </p>
                 <div className="rewards-row">
@@ -592,6 +629,7 @@ export default function App() {
 
             {/* MAP / THIRD PLACES */}
             <Screen id="screen-map" active={screen === 'map'}>
+              <LogoHeader />
               <div className="back-row">
                 <button className="back-btn" onClick={() => goto('dashboard')}>
                   ←
@@ -628,6 +666,16 @@ export default function App() {
                 <p>Open table nights · Easy way to meet new people offline.</p>
               </div>
 
+                {/* Midpoint finder entry */}
+                <button
+                  className="btn btn-secondary"
+                  style={{ marginTop: 8, marginBottom: 4 }}
+                  onClick={() => goto("midpoint")}
+                >
+                  <FiMapPin style={{ marginRight: 6 }} />
+                  Find a fair meetup spot
+                </button>
+
               <button className="btn btn-secondary"
                 style={{ marginRight: 6 }} 
                 onClick={() => goto('nearby')}
@@ -639,8 +687,116 @@ export default function App() {
               <BottomNav current={screen} goto={goto} />
             </Screen>
 
+            {/* PLAN BUILDER + SHARED TO-DO */}
+            <Screen id="screen-plan-builder" active={screen === "plan-builder"}>
+              <LogoHeader />
+
+              <div className="back-row">
+                <button className="back-btn" onClick={() => goto("dashboard")}>
+                  ←
+                </button>
+                <div className="back-title">Plan builder</div>
+              </div>
+
+              {/* Plan summary */}
+              <div className="card">
+                <div className="section-label">Plan details</div>
+                <h3>Sunset walk &amp; coffee</h3>
+                <p>
+                  This is what your friends see when you share a hangout: simple, clear,
+                  and focused on the real-life experience.
+                </p>
+
+                <div className="plan-row">
+                  <FiMapPin className="plan-icon" />
+                  <div>
+                    <div className="plan-label">Where</div>
+                    <div className="plan-value">City Park → Café Luna</div>
+                  </div>
+                </div>
+
+                <div className="plan-row">
+                  <FiClock className="plan-icon" />
+                  <div>
+                    <div className="plan-label">When</div>
+                    <div className="plan-value">Today · 6:30–8:00 PM</div>
+                  </div>
+                </div>
+
+                <div className="plan-row">
+                  <FiUsers className="plan-icon" />
+                  <div>
+                    <div className="plan-label">Who</div>
+                    <div className="plan-value">You, Alex, Maya · open to 1–2 more</div>
+                  </div>
+                </div>
+
+                <div className="plan-row">
+                  <FiList className="plan-icon" />
+                  <div>
+                    <div className="plan-label">Vibe</div>
+                    <div className="plan-value">
+                      Walk, talk, decompress, then grab a drink. Phones mostly away.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Shared to-do list */}
+              <div className="card">
+                <div className="section-label">Shared to-do list</div>
+                <h3>Who&apos;s bringing what?</h3>
+                <p>
+                  Everyone in the hangout can see and edit this list so planning doesn&apos;t
+                  turn into 40 messages.
+                </p>
+
+                <ul className="todo-list">
+                  <li className="todo-item done">
+                    <span className="todo-check" />
+                    <span className="todo-text">Water bottles</span>
+                    <span className="todo-tag">You</span>
+                  </li>
+                  <li className="todo-item">
+                    <span className="todo-check" />
+                    <span className="todo-text">Deck of cards / small game</span>
+                    <span className="todo-tag">Alex</span>
+                  </li>
+                  <li className="todo-item">
+                    <span className="todo-check" />
+                    <span className="todo-text">Playlist ideas</span>
+                    <span className="todo-tag">Maya</span>
+                  </li>
+                  <li className="todo-item">
+                    <span className="todo-check" />
+                    <span className="todo-text">Snack to share</span>
+                    <span className="todo-tag">Unclaimed</span>
+                  </li>
+                </ul>
+
+                <div className="todo-add-row">
+                  <input
+                    className="text-input"
+                    placeholder="Add item (prototype only, not saved)"
+                  />
+                  <button className="btn-small" type="button">
+                    +
+                  </button>
+                </div>
+
+                <div className="muted" style={{ marginTop: 6, fontSize: 12 }}>
+                  In a real app this list would sync live between everyone invited to the
+                  hangout.
+                </div>
+              </div>
+
+              <BottomNav current={screen} goto={goto} />
+            </Screen>
+
+
             {/* PEOPLE NEARBY */}
             <Screen id="screen-nearby" active={screen === 'nearby'}>
+              <LogoHeader />
               <div className="back-row">
                 <button className="back-btn" onClick={() => goto('map')}>
                   ←
@@ -706,8 +862,89 @@ export default function App() {
                 </div>         
               </Screen>
 
+              {/* MIDPOINT FINDER */}
+              <Screen id="screen-midpoint" active={screen === "midpoint"}>
+                <LogoHeader />
+
+                <div className="back-row">
+                  <button className="back-btn" onClick={() => goto("map")}>
+                    ←
+                  </button>
+                  <div className="back-title">Midpoint finder</div>
+                </div>
+
+                <div className="card midpoint-card">
+                  <div className="section-label">Step 1</div>
+                  <h3>Where are you both coming from?</h3>
+                  <p>
+                    In a real app this would use location services. For the prototype, think
+                    of these as rough neighborhoods or campuses.
+                  </p>
+
+                  <div className="form-row">
+                    <label className="field-label">Your area</label>
+                    <input
+                      className="text-input"
+                      placeholder="e.g. Campus A, Downtown, North Side"
+                    />
+                  </div>
+
+                  <div className="form-row">
+                    <label className="field-label">Friend&apos;s area</label>
+                    <input
+                      className="text-input"
+                      placeholder="e.g. Campus B, East Side, Near mall"
+                    />
+                  </div>
+                </div>
+
+                <div className="card">
+                  <div className="section-label">Step 2</div>
+                  <h3>Suggested midpoint</h3>
+                  <p>
+                    Based on travel time, we pick somewhere roughly in the middle that also
+                    works as a &quot;third place&quot; — not home, not work, but a neutral
+                    place to connect.
+                  </p>
+
+                  <div className="midpoint-spot">
+                    <div className="midpoint-icon">
+                      <FiMapPin />
+                    </div>
+                    <div>
+                      <div className="midpoint-name">City Park · Main entrance</div>
+                      <div className="midpoint-meta">
+                        About 10–12 min from both of you · benches · walking paths
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul className="midpoint-list">
+                    <li>Feels fair — similar travel effort for both people.</li>
+                    <li>Public, open space that&apos;s safe and low-pressure.</li>
+                    <li>Easy to extend into a walk, coffee, or group meetup.</li>
+                  </ul>
+
+                  <button
+                    className="btn btn-secondary"
+                    style={{ marginTop: 10 }}
+                    onClick={() => goto("plan-builder")}
+                  >
+                    <FiArrowRight style={{ marginRight: 6 }} />
+                    Turn this into a hangout plan
+                  </button>
+                </div>
+
+                <div className="footer-hint">
+                  In the real app, this would use live maps, travel time, and safety filters
+                  to suggest smart meet-in-the-middle locations.
+                </div>
+              </Screen>
+
+
             {/* CHAT LIST */}
             <Screen id="screen-chats" active={screen === 'chats'}>
+              <LogoHeader />
               <div className="back-row">
                 <button className="back-btn" onClick={() => goto('dashboard')}>
                   ←
@@ -758,6 +995,7 @@ export default function App() {
 
             {/* CHAT ROOM MOCKUP */}
             <Screen id="screen-chat-room" active={screen === 'chat-room'}>
+              <LogoHeader />
               <div className="back-row">
                 <button className="back-btn" onClick={() => goto('chats')}>
                   ←
@@ -830,6 +1068,14 @@ export default function App() {
                   <div className="xp-bar-fill" style={{ width: '72%' }} />
                 </div>
 
+                <button
+                className="btn btn-ghost"
+                style={{ marginTop: 6 }}
+                onClick={() => goto("collections")}
+                >
+                View Collections
+                </button>
+
                 <div className="muted" style={{ marginTop: 6, fontSize: 12 }}>
                   Your profile grows only when you do things offline — hangouts, focus mode,
                   and trying new third places.
@@ -839,7 +1085,7 @@ export default function App() {
               {/* Friends summary */}
               <div className="card">
                 <div className="section-label">Friends</div>
-                <h3>23 friends · 12 active in IRL Sync this month</h3>
+                <h3>23 friends · 12 active in FLIP this month</h3>
                 <p>
                   Your friends list is built from people you’ve actually met in person and
                   scanned with your QR code. No ghost friends, only real connections.
@@ -908,8 +1154,73 @@ export default function App() {
                 </div>
               </Screen>
 
+              {/* COLLECTIONS */}
+              <Screen id="screen-collections" active={screen === 'collections'}>
+                <LogoHeader />
+
+                <div className="back-row">
+                  <button className="back-btn" onClick={() => goto('dashboard')}>
+                    ←
+                  </button>
+                  <div className="back-title">Collections</div>
+                </div>
+
+                <div className="subtitle" style={{ marginBottom: 10 }}>
+                  Everything you&apos;ve discovered through real-life experiences.
+                </div>
+
+                {/* Coffee spots collection */}
+                <div className="collection-block">
+                  <h3 className="collection-title">Coffee spots ☕</h3>
+                  <div className="collection-grid">
+                    <div className="collection-item unlocked">Café Luna</div>
+                    <div className="collection-item unlocked">Bean &amp; Co.</div>
+                    <div className="collection-item locked">???</div>
+                  </div>
+                </div>
+
+                {/* Parks collection */}
+                <div className="collection-block">
+                  <h3 className="collection-title">Parks &amp; nature 🌿</h3>
+                  <div className="collection-grid">
+                    <div className="collection-item unlocked">City Park</div>
+                    <div className="collection-item unlocked">Greenway Trails</div>
+                    <div className="collection-item locked">???</div>
+                  </div>
+                </div>
+
+                {/* People you met */}
+                <div className="collection-block">
+                  <h3 className="collection-title">People you&apos;ve met 👥</h3>
+                  <div className="collection-grid">
+                    <div className="collection-item unlocked">Alex</div>
+                    <div className="collection-item unlocked">Jordan</div>
+                    <div className="collection-item locked">???</div>
+                  </div>
+                </div>
+
+                {/* Events attended */}
+                <div className="collection-block">
+                  <h3 className="collection-title">Events attended 🎉</h3>
+                  <div className="collection-grid">
+                    <div className="collection-item unlocked">Board game night</div>
+                    <div className="collection-item unlocked">Sunset walk</div>
+                    <div className="collection-item locked">???</div>
+                  </div>
+                </div>
+
+                <div className="footer-hint">
+                  In a real app, these would unlock automatically when you visit new places,
+                  attend events, or meet people in person.
+                </div>
+
+                <BottomNav current={screen} goto={goto} />
+              </Screen>
+
+
               {/* FRIENDS LIST */}
               <Screen id="screen-friends" active={screen === 'friends'}>
+                <LogoHeader />
                 <div className="back-row">
                   <button className="back-btn" onClick={() => goto('profile')}>
                     ←
