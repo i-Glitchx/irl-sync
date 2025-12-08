@@ -13,7 +13,8 @@ import {
   FiLock,
   FiClock,
   FiList,
-  FiArrowRight
+  FiArrowRight,
+  FiCalendar
 } from 'react-icons/fi';
 import FLIPLogo from "./assets/flip-logo-nobg.png"; // keep your correct path
 
@@ -653,10 +654,7 @@ export default function App() {
                 Spots
               </div>
 
-              <div className="card">
-                <h3>Café Luna</h3>
-                <p>Cozy café · Outlets · Quiet background music.</p>
-              </div>
+              
               <div className="card">
                 <h3>City Park</h3>
                 <p>Walking loop · Benches · Great for phone-free walks.</p>
@@ -1055,6 +1053,10 @@ export default function App() {
                 </div>
               </div>
 
+              <button className="btn btn-ghost" onClick={() => goto('qr')}>
+                Show my QR code
+              </button>
+
               {/* IRL summary */}
               <div className="card">
                 <div className="section-label">IRL summary</div>
@@ -1159,7 +1161,7 @@ export default function App() {
                 <LogoHeader />
 
                 <div className="back-row">
-                  <button className="back-btn" onClick={() => goto('dashboard')}>
+                  <button className="back-btn" onClick={() => goto('profile')}>
                     ←
                   </button>
                   <div className="back-title">Collections</div>
