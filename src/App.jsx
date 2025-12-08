@@ -178,52 +178,79 @@ export default function App() {
             </Screen>
 
             {/* HOW IT WORKS */}
-            <Screen id="screen-how" active={screen === 'how'}>
+            <Screen id="screen-info" active={screen === 'how'}>
+              <LogoHeader />
+
               <div className="back-row">
                 <button className="back-btn" onClick={() => goto('welcome')}>
                   ←
                 </button>
-                <div className="back-title">How it works</div>
+                <div className="back-title">How FLIP Works</div>
               </div>
 
               <div className="card">
-                <h3>Meet to add friends</h3>
-                <p>
-                  You can only connect by scanning each other’s QR code while
-                  standing together in person.
+                <div className="section-label">The Problem</div>
+                <p className="info-text">
+                  Social apps today are engineered for infinite scrolling, dopamine spikes,
+                  and algorithm-driven content. People feel more connected online yet more
+                  disconnected in real life.
                 </p>
               </div>
 
               <div className="card">
-                <h3>Chats that depend on real life</h3>
-                <p>
-                  Group chats stay active only if your group actually meets up
-                  a few times a month. No more ghost groups.
+                <div className="section-label">Our Solution</div>
+                <p className="info-text">
+                  FLIP is a social app that flips that dynamic. Instead of rewarding screen
+                  time, FLIP rewards real-life interaction. You earn IRL Points by meeting
+                  people, exploring your city, staying off your phone, and participating in
+                  group hangouts.
                 </p>
               </div>
 
               <div className="card">
-                <h3>Discover third places near you</h3>
-                <p>
-                  Find cafés, parks, libraries, and community spots that are
-                  perfect for talking, studying, or just hanging out.
-                </p>
+                <div className="section-label">Core Features</div>
+
+                <ul className="info-list">
+                  <li><strong>IRL-Verified Friends:</strong> Add people only by meeting in person
+                    or through trusted mutual connections using IRL Points.</li>
+
+                  <li><strong>IRL Points System:</strong> Earn points from real-life behavior:
+                    hangouts, exploring third places, joining events, and staying phone-free.</li>
+
+                  <li><strong>Midpoint Finder:</strong> Suggests a fair, neutral meetup spot
+                    halfway between you and a friend — solving the “where should we meet?” problem.</li>
+
+                  <li><strong>Plan Builder:</strong> Turns a location or event into a clean, 
+                    sharable hangout plan with time, place, group info, and vibe.</li>
+
+                  <li><strong>Shared To-Do Lists:</strong> Perfect for group hangouts — let 
+                    everyone coordinate without dozens of messages.</li>
+
+                  <li><strong>Local Events:</strong> Curated, human-sized list of things happening 
+                    nearby designed to get people off their phones.</li>
+
+                  <li><strong>Profile Levels & Achievements:</strong> Level up by living your 
+                    life. Unlock badges, memories, and collections of places you’ve visited.</li>
+
+                  <li><strong>People Nearby:</strong> Discover real users in your area who are 
+                    open to meeting at third places.</li>
+
+                  <li><strong>Healthy, Meaningful Posting:</strong> You must spend IRL Points to 
+                    post — encouraging fewer, more meaningful updates based on real experiences.</li>
+                </ul>
               </div>
 
               <div className="card">
-                <h3>Earn rewards for showing up</h3>
-                <p>
-                  Local businesses offer small discounts when friends check in
-                  together and put their phones away.
+                <div className="section-label">Why It Works</div>
+                <p className="info-text">
+                  FLIP reverses the incentives of traditional social media. The more 
+                  time you spend in the real world, the more useful the app becomes. The 
+                  less you scroll, the more you unlock. It’s a social network designed to 
+                  strengthen real relationships, not replace them.
                 </p>
               </div>
 
-              <button
-                className="btn btn-primary"
-                onClick={() => goto('dashboard')}
-              >
-                Continue to app
-              </button>
+              
             </Screen>
 
             {/* DASHBOARD */}
@@ -260,36 +287,6 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="section-label" style={{ marginTop: 16 }}>
-                Nearby third places
-              </div>
-
-              <div className="card">
-                <h3>
-                  <FiCoffee style={{ marginRight: 6 }} />
-                  Café Luna · 0.4 miles
-                </h3>
-                <p>
-                  Quiet tables, good coffee, perfect for conversation or study.
-                </p>
-              </div>
-
-              <div className="card">
-                <h3>
-                  <FiCompass style={{ marginRight: 6 }} />
-                  City Park · 0.7 miles
-                </h3>
-                <p>Walk-and-talk loop with benches and open grass.</p>
-              </div>
-
-              <div className="card">
-                <h3>
-                  <FiUsers style={{ marginRight: 6 }} />
-                  Board Game Hub · 1.2 miles
-                </h3>
-                <p>Community game nights. Great for meeting new people offline.</p>
-              </div>
-
               <button
                 className="btn btn-secondary"
                 style={{ marginTop: 6 }}
@@ -304,6 +301,14 @@ export default function App() {
                 onClick={() => goto('stats')}
               >
                 View your progress
+              </button>
+
+              <button
+                className="btn btn-ghost"
+                style={{ marginTop: 6 }}
+                onClick={() => goto('local-events')}
+              >
+                View local events
               </button>
 
               <button
@@ -1031,6 +1036,89 @@ export default function App() {
               </div>
             </Screen>
 
+            {/* LOCAL EVENTS */}
+            <Screen id="screen-local-events" active={screen === 'local-events'}>
+              <LogoHeader />
+
+              <div className="back-row">
+                <button className="back-btn" onClick={() => goto('dashboard')}>
+                  ←
+                </button>
+                <div className="back-title">Local events</div>
+              </div>
+
+              <div className="subtitle" style={{ marginBottom: 10 }}>
+                A simple, human-centered list of things happening nearby — designed to get
+                you out of the house, not glued to a feed.
+              </div>
+
+              <div className="events-filters">
+                <button className="chip chip-active">All</button>
+                <button className="chip">Coffee &amp; study</button>
+                <button className="chip">Outdoors</button>
+                <button className="chip">Games &amp; hobbies</button>
+              </div>
+
+              <div className="event-card">
+                <div className="event-header">
+                  <div className="event-title">
+                    <FiCalendar style={{ marginRight: 6 }} />
+                    Study &amp; Sip · Café Luna
+                  </div>
+                  <div className="event-tag">Today · 5:30–7:30 PM</div>
+                </div>
+                <div className="event-meta">0.4 miles · quiet tables · phone-free challenge</div>
+                <p className="event-desc">
+                  Low-pressure study block. Bring homework, a book, or side projects. Extra
+                  IRL points if you stay mostly off your phone.
+                </p>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => goto('plan-builder')}
+                >
+                  Turn this into a plan
+                </button>
+              </div>
+
+              <div className="event-card">
+                <div className="event-header">
+                  <div className="event-title">
+                    <FiCalendar style={{ marginRight: 6 }} />
+                    Sunset walk · City Park
+                  </div>
+                  <div className="event-tag">Tomorrow · 6:30–7:30 PM</div>
+                </div>
+                <div className="event-meta">0.7 miles · open paths · group-friendly</div>
+                <p className="event-desc">
+                  Meet at the main entrance, walk a loop, talk about anything except
+                  social media. Great for decompressing after class or work.
+                </p>
+              </div>
+
+              <div className="event-card">
+                <div className="event-header">
+                  <div className="event-title">
+                    <FiCalendar style={{ marginRight: 6 }} />
+                    Game night · Board Game Hub
+                  </div>
+                  <div className="event-tag">Friday · 7:00–10:00 PM</div>
+                </div>
+                <div className="event-meta">1.2 miles · open table night</div>
+                <p className="event-desc">
+                  Bring a friend or come solo. Staff helps you join a table so you&apos;re
+                  not awkwardly hovering. Easy way to meet new people offline.
+                </p>
+              </div>
+
+              <div className="footer-hint">
+                In a real version, this would pull from local venues, campuses, and community
+                spaces — but keep the list human-sized and intentional instead of an endless feed.
+              </div>
+
+              <BottomNav current={screen} goto={goto} />
+            </Screen>
+
+
             {/* PROFILE */}
             <Screen id="screen-profile" active={screen === 'profile'}>
               <div className="back-row">
@@ -1219,6 +1307,89 @@ export default function App() {
                 <BottomNav current={screen} goto={goto} />
               </Screen>
 
+            {/* MUTUAL FRIEND ADD */}
+            <Screen id="screen-mutual-add" active={screen === 'mutual-add'}>
+              <LogoHeader />
+
+              <div className="back-row">
+                <button className="back-btn" onClick={() => goto('friends')}>
+                  ←
+                </button>
+                <div className="back-title">Add friends via mutuals</div>
+              </div>
+
+              <div className="card mutual-header">
+                <div className="section-label">Your IRL points</div>
+                <div className="mutual-points-row">
+                  <div className="mutual-points">1,240</div>
+                  <div className="mutual-points-caption">
+                    Earned from hangouts, phone-free sessions and new third places.
+                  </div>
+                </div>
+                <div className="mutual-hint">
+                  You can spend a small amount of points to connect with friends-of-friends
+                  that your real-life circle vouches for.
+                </div>
+              </div>
+
+              <div className="card mutual-card">
+                <div className="section-label">Suggested connections</div>
+                <p style={{ fontSize: 12, marginBottom: 8 }}>
+                  These people share at least one IRL-verified friend with you.
+                </p>
+
+                <div className="mutual-row">
+                  <div className="mutual-avatar">M</div>
+                  <div className="mutual-main">
+                    <div className="mutual-name">Maya</div>
+                    <div className="mutual-mutuals">Mutual: Alex (3 hangouts together)</div>
+                    <div className="mutual-note">
+                      You&apos;ve both been to Café Luna and City Park.
+                    </div>
+                  </div>
+                  <button className="mutual-action">
+                    Spend 50 pts
+                  </button>
+                </div>
+
+                <div className="mutual-row">
+                  <div className="mutual-avatar mutual-b">J</div>
+                  <div className="mutual-main">
+                    <div className="mutual-name">Jordan</div>
+                    <div className="mutual-mutuals">Mutuals: Alex &amp; Sam</div>
+                    <div className="mutual-note">
+                      Shows up at board game nights · great for group hangouts.
+                    </div>
+                  </div>
+                  <button className="mutual-action">
+                    Spend 50 pts
+                  </button>
+                </div>
+
+                <div className="mutual-row mutual-disabled">
+                  <div className="mutual-avatar mutual-c">?</div>
+                  <div className="mutual-main">
+                    <div className="mutual-name">More to unlock</div>
+                    <div className="mutual-mutuals">Requires higher trust level</div>
+                    <div className="mutual-note">
+                      Earn 500 more IRL points and attend 2 group hangouts to see more
+                      suggestions.
+                    </div>
+                  </div>
+                  <button className="mutual-action" disabled>
+                    Locked
+                  </button>
+                </div>
+              </div>
+
+              <div className="footer-hint">
+                In a real app, this flow would prevent random adds and spam — you can only
+                reach new people through trusted mutuals, and only by spending points you
+                earned in real life.
+              </div>
+            </Screen>
+
+
 
               {/* FRIENDS LIST */}
               <Screen id="screen-friends" active={screen === 'friends'}>
@@ -1234,6 +1405,15 @@ export default function App() {
                   <span className="friends-dot" />
                   23 friends · IRL-verified only
                 </div>
+
+                <button
+                  className="btn btn-secondary"
+                  style={{ marginTop: 10, marginBottom: 6 }}
+                  onClick={() => goto('mutual-add')}
+                >
+                  <FiUserPlus style={{ marginRight: 6 }} />
+                  Add friends through mutuals
+                </button>
 
                 <div className="subtitle" style={{ marginTop: 8 }}>
                   Everyone here has been added by scanning each other’s QR codes in person.
