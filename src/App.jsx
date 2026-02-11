@@ -1,5 +1,6 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
+import { getUpcomingEvents } from "./lib/eventsApi";
 import {
   FiHome,
   FiMap,
@@ -81,6 +82,11 @@ function BottomNav({ current, goto }) {
 export default function App() {
   const [screen, setScreen] = useState('welcome');
 
+  const [events, setEvents] = useState([]);
+  const [eventsLoading, setEventsLoading] = useState(false);
+  const [eventsError, setEventsError] = useState("");
+
+
   // fake timer/points for hangout screen
   const [seconds, setSeconds] = useState(37 * 60 + 12);
   const [points, setPoints] = useState(37);
@@ -97,6 +103,33 @@ export default function App() {
     }, 1000);
     return () => clearInterval(interval);
   }, [screen]);
+
+  useEffect(() => {
+    if (screen !== "local-events") return;
+
+    let alive = true;
+    setEventsLoading(true);
+    setEventsError("");
+
+    getUpcomingEvents()
+      .then((rows) => {
+        if (!alive) return;
+        setEvents(rows);
+      })
+      .catch((err) => {
+        if (!alive) return;
+        setEventsError(err?.message || "Failed to load events");
+      })
+      .finally(() => {
+        if (!alive) return;
+        setEventsLoading(false);
+      });
+
+    return () => {
+      alive = false;
+    };
+  }, [screen]);
+
 
   const hours = String(Math.floor(seconds / 3600)).padStart(2, '0');
   const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
@@ -1059,56 +1092,52 @@ export default function App() {
                 <button className="chip">Games &amp; hobbies</button>
               </div>
 
-              <div className="event-card">
-                <div className="event-header">
-                  <div className="event-title">
-                    <FiCalendar style={{ marginRight: 6 }} />
-                    Study &amp; Sip · Café Luna
-                  </div>
-                  <div className="event-tag">Today · 5:30–7:30 PM</div>
+              {eventsLoading && (
+                <div className="card">
+                  <div className="section-label">Loading</div>
+                  <p>Fetching upcoming events…</p>
                 </div>
-                <div className="event-meta">0.4 miles · quiet tables · phone-free challenge</div>
-                <p className="event-desc">
-                  Low-pressure study block. Bring homework, a book, or side projects. Extra
-                  IRL points if you stay mostly off your phone.
-                </p>
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => goto('plan-builder')}
-                >
-                  Turn this into a plan
-                </button>
-              </div>
+              )}
 
-              <div className="event-card">
-                <div className="event-header">
-                  <div className="event-title">
-                    <FiCalendar style={{ marginRight: 6 }} />
-                    Sunset walk · City Park
-                  </div>
-                  <div className="event-tag">Tomorrow · 6:30–7:30 PM</div>
+              {eventsError && (
+                <div className="card">
+                  <div className="section-label">Error</div>
+                  <p style={{ color: "#b91c1c" }}>{eventsError}</p>
                 </div>
-                <div className="event-meta">0.7 miles · open paths · group-friendly</div>
-                <p className="event-desc">
-                  Meet at the main entrance, walk a loop, talk about anything except
-                  social media. Great for decompressing after class or work.
-                </p>
-              </div>
+              )}
 
-              <div className="event-card">
-                <div className="event-header">
-                  <div className="event-title">
-                    <FiCalendar style={{ marginRight: 6 }} />
-                    Game night · Board Game Hub
-                  </div>
-                  <div className="event-tag">Friday · 7:00–10:00 PM</div>
+              {!eventsLoading && !eventsError && events.length === 0 && (
+                <div className="card">
+                  <div className="section-label">No events</div>
+                  <p>No upcoming events found yet.</p>
                 </div>
-                <div className="event-meta">1.2 miles · open table night</div>
-                <p className="event-desc">
-                  Bring a friend or come solo. Staff helps you join a table so you&apos;re
-                  not awkwardly hovering. Easy way to meet new people offline.
-                </p>
-              </div>
+              )}
+
+              {events.map((ev) => (
+                <div className="event-card" key={ev.id}>
+                  <div className="event-header">
+                    <div className="event-title">
+                      <FiCalendar style={{ marginRight: 6 }} />
+                      {ev.title} · {ev.location_name}
+                    </div>
+                    <div className="event-tag">
+                      {new Date(ev.starts_at).toLocaleString()}
+                    </div>
+                  </div>
+
+                  <div className="event-meta">
+                    {(ev.distance_miles ? `${ev.distance_miles} miles · ` : "")}
+                    {ev.meta || ""}
+                  </div>
+
+                  {ev.description && <p className="event-desc">{ev.description}</p>}
+
+                  <button className="btn btn-secondary" onClick={() => goto("plan-builder")}>
+                    Turn this into a plan
+                  </button>
+                </div>
+              ))}
+
 
               <div className="footer-hint">
                 In a real version, this would pull from local venues, campuses, and community
